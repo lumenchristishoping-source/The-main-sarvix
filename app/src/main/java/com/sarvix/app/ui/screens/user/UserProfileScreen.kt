@@ -19,6 +19,8 @@ import com.sarvix.app.data.model.MoodStatus
 import com.sarvix.app.data.model.User
 import com.sarvix.app.ui.navigation.Screen
 import com.sarvix.app.ui.theme.*
+import com.sarvix.app.ui.components.getMoodColor
+import com.sarvix.app.ui.components.FlowRow
 import com.sarvix.app.utils.Resource
 import com.sarvix.app.viewmodel.ChatViewModel
 import com.sarvix.app.viewmodel.ProfileViewModel
@@ -324,39 +326,5 @@ fun UserProfileContent(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun getMoodColor(mood: MoodStatus): Color {
-    return when (mood) {
-        MoodStatus.HAPPY -> MoodHappy
-        MoodStatus.EXCITED -> MoodExcited
-        MoodStatus.CALM -> MoodCalm
-        MoodStatus.THOUGHTFUL -> MoodThoughtful
-        MoodStatus.TIRED -> MoodTired
-        MoodStatus.STRESSED -> MoodStressed
-        MoodStatus.INSPIRED -> MoodInspired
-        MoodStatus.FOCUSED -> MoodFocused
-        MoodStatus.SOCIAL -> MoodSocial
-        MoodStatus.CREATIVE -> MoodCreative
-        MoodStatus.REFLECTIVE -> MoodReflective
-        MoodStatus.NEUTRAL -> MoodNeutral
-    }
-}
-
-@Composable
-fun FlowRow(
-    modifier: Modifier = Modifier,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    content: @Composable RowScope.() -> Unit
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = horizontalArrangement,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        content()
     }
 }

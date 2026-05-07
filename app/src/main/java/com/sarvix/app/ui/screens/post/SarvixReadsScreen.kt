@@ -1,5 +1,6 @@
 package com.sarvix.app.ui.screens.post
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -217,7 +218,7 @@ fun TextPostCard(
             
             // Content
             Text(
-                text = displayContent,
+                text = displayContent ?: "",
                 style = MaterialTheme.typography.bodyLarge
             )
             

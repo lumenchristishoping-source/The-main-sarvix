@@ -10,6 +10,7 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color as ComposeColor
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -19,14 +20,14 @@ private val DarkColorScheme = darkColorScheme(
     primary = Primary,
     secondary = Secondary,
     tertiary = PrimaryLight,
-    background = Color(0xFF111827),
-    surface = Color(0xFF1F2937),
-    surfaceVariant = Color(0xFF374151),
+    background = ComposeColor(0xFF111827),
+    surface = ComposeColor(0xFF1F2937),
+    surfaceVariant = ComposeColor(0xFF374151),
     onPrimary = OnPrimary,
     onSecondary = OnSecondary,
-    onBackground = Color(0xFFF9FAFB),
-    onSurface = Color(0xFFF3F4F6),
-    onSurfaceVariant = Color(0xFF9CA3AF),
+    onBackground = ComposeColor(0xFFF9FAFB),
+    onSurface = ComposeColor(0xFFF3F4F6),
+    onSurfaceVariant = ComposeColor(0xFF9CA3AF),
     error = Error,
     onError = OnError
 )

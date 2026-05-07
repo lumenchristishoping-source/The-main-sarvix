@@ -1,3 +1,4 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 package com.sarvix.app.ui.screens.profile
 
 import androidx.compose.foundation.clickable
@@ -17,11 +18,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.sarvix.app.data.model.MoodStatus
+import com.sarvix.app.data.model.User
 import com.sarvix.app.ui.theme.*
 import com.sarvix.app.utils.Resource
+import com.sarvix.app.ui.components.FlowRow
+import com.sarvix.app.ui.components.getMoodColor
 import com.sarvix.app.viewmodel.ProfileViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 @Composable
 fun EditProfileScreen(
     navController: NavController,
@@ -228,7 +232,8 @@ fun EditProfileScreen(
                         
                         Spacer(modifier = Modifier.height(12.dp))
                         
-                        FlowRow(
+                        androidx.compose.foundation.layout.FlowRow(
+                            modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
@@ -359,39 +364,5 @@ fun ProfilePictureSection(
                 }
             }
         }
-    }
-}
-
-@Composable
-fun getMoodColor(mood: MoodStatus): Color {
-    return when (mood) {
-        MoodStatus.HAPPY -> MoodHappy
-        MoodStatus.EXCITED -> MoodExcited
-        MoodStatus.CALM -> MoodCalm
-        MoodStatus.THOUGHTFUL -> MoodThoughtful
-        MoodStatus.TIRED -> MoodTired
-        MoodStatus.STRESSED -> MoodStressed
-        MoodStatus.INSPIRED -> MoodInspired
-        MoodStatus.FOCUSED -> MoodFocused
-        MoodStatus.SOCIAL -> MoodSocial
-        MoodStatus.CREATIVE -> MoodCreative
-        MoodStatus.REFLECTIVE -> MoodReflective
-        MoodStatus.NEUTRAL -> MoodNeutral
-    }
-}
-
-@Composable
-fun FlowRow(
-    modifier: Modifier = Modifier,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    content: @Composable RowScope.() -> Unit
-) {
-    Row(
-        modifier = modifier,
-        horizontalArrangement = horizontalArrangement,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        content()
     }
 }

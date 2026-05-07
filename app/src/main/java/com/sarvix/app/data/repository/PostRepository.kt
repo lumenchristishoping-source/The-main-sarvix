@@ -163,8 +163,9 @@ class PostRepository @Inject constructor(
             videoRef.putFile(videoUri).await()
             val videoUrl = videoRef.downloadUrl.await().toString()
             
-            // Generate thumbnail (in production, use Firebase Functions)
-            val thumbnailUrl = "" // Placeholder
+            // Note: Thumbnail generation is typically handled server-side via Firebase Functions
+            // for mobile clients to avoid heavy processing. Storing videoUrl as thumbnailUrl for now.
+            val thumbnailUrl = videoUrl
             
             val post = VideoPost(
                 id = videoId,

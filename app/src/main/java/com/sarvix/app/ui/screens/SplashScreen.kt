@@ -55,13 +55,13 @@ fun SplashScreen(
                 fontWeight = FontWeight.Bold,
                 color = Primary
             )
-            Spacer(modifier = Height(8.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Clarity in Communication",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Height(32.dp))
+            Spacer(modifier = Modifier.height(32.dp))
             CircularProgressIndicator(
                 color = Primary
             )

@@ -35,6 +35,7 @@ fun MatchesScreen(
     val suggestionsState by viewModel.suggestionsState.collectAsState()
     val matchesState by viewModel.matchesState.collectAsState()
     val selectedMatchType by viewModel.selectedMatchType.collectAsState()
+    val createChatState by chatViewModel.createChatState.collectAsState()
     
     var selectedTab by remember { mutableStateOf(0) } // 0 = Discover, 1 = Matches
     
@@ -45,6 +46,17 @@ fun MatchesScreen(
     LaunchedEffect(key1 = selectedTab) {
         if (selectedTab == 1) {
             viewModel.loadMatches()
+        }
+    }
+
+    LaunchedEffect(createChatState) {
+        val state = createChatState
+        if (state is Resource.Success) {
+            val chatId = state.data
+            if (!chatId.isNullOrEmpty()) {
+                navController.navigate(Screen.ChatDetail.createRoute(chatId))
+                chatViewModel.clearStates()
+            }
         }
     }
     

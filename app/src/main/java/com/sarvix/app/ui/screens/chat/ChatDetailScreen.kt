@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -184,8 +185,9 @@ fun ChatDetailScreen(
                         if (messageText.isNotBlank()) {
                             // Get receiver ID from messages
                             val messages = (messagesState as? Resource.Success)?.data
-                            val receiverId = messages?.firstOrNull { it.senderId != viewModel.currentChatId.value }?.senderId
-                                ?: messages?.firstOrNull { it.receiverId != viewModel.currentChatId.value }?.receiverId
+                            val currentUserId = viewModel.currentUserId
+                            val receiverId = messages?.firstOrNull { it.senderId != currentUserId }?.senderId
+                                ?: messages?.firstOrNull { it.receiverId != currentUserId }?.receiverId
                                 ?: ""
                             
                             viewModel.sendMessage(messageText, receiverId)
@@ -234,7 +236,7 @@ fun ChatDetailScreen(
                             items(messages) { message ->
                                 MessageBubble(
                                     message = message,
-                                    isFromMe = message.senderId == chatId, // Adjust based on actual user ID
+                                    isFromMe = message.senderId == viewModel.currentUserId,
                                     clarifyLimit = (clarifyLimitState as? Resource.Success)?.data,
                                     onRequestClarification = {
                                         viewModel.requestClarification(message.id)
@@ -274,7 +276,7 @@ fun MessageBubble(
     onRequestClarification: () -> Unit,
     onTranslate: () -> Unit
 ) {
-    var showClarification by remember { mutableStateOf(false) }
+    var showClarification by remember { mutableStateOf(message.clarifications.isNotEmpty()) }
     var showTranslation by remember { mutableStateOf(false) }
     
     Column(
@@ -352,33 +354,46 @@ fun MessageBubble(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Clarify Button
+                val hasClarification = message.clarifications.isNotEmpty()
                 val remainingClarifications = clarifyLimit?.getRemainingCount() ?: 5
                 val isLimitReached = clarifyLimit?.isLimitReached() ?: false
                 
-                TextButton(
-                    onClick = { 
-                        if (!isLimitReached) {
-                            onRequestClarification()
-                            showClarification = true
-                        }
-                    },
-                    enabled = !isLimitReached,
-                    modifier = Modifier.height(32.dp)
-                ) {
-                    Text(
-                        text = if (isLimitReached) "Limit Reached" else "Clarify",
-                        style = MaterialTheme.typography.labelSmall
-                    )
-                }
-                
-                // Remaining count
-                if (!isLimitReached) {
-                    Text(
-                        text = "($remainingClarifications left)",
-                        style = MaterialTheme.typography.labelSmall,
-                        color = OnSurfaceVariant
-                    )
+                if (hasClarification) {
+                    TextButton(
+                        onClick = { showClarification = !showClarification },
+                        modifier = Modifier.height(32.dp)
+                    ) {
+                        Text(
+                            text = if (showClarification) "Hide Clarification" else "Show Clarification",
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }
+                } else {
+                    // Clarify Button
+                    TextButton(
+                        onClick = {
+                            if (!isLimitReached) {
+                                onRequestClarification()
+                                showClarification = true
+                            }
+                        },
+                        enabled = !isLimitReached,
+                        modifier = Modifier.height(32.dp)
+                    ) {
+                        Text(
+                            text = if (isLimitReached) "Limit Reached" else "Clarify",
+                            style = MaterialTheme.typography.labelSmall
+                        )
+                    }
+
+                    // Remaining count
+                    if (!isLimitReached) {
+                        Text(
+                            text = "($remainingClarifications left)",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = OnSurfaceVariant
+                        )
+                    }
                 }
                 
                 // Translation toggle

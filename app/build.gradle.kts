@@ -63,14 +63,12 @@ android {
         }
         debug {
             isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
         }
         create("preview") {
             initWith(getByName("release"))
             isMinifyEnabled = false
             isShrinkResources = false
             signingConfig = signingConfigs.getByName("release")
-            applicationIdSuffix = ".preview"
             versionNameSuffix = "-preview"
         }
     }

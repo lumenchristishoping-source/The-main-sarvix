@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.sarvix.app.data.model.Post
+import com.sarvix.app.data.model.PostType
 import com.sarvix.app.data.model.ReadSpace
 import com.sarvix.app.ui.theme.Primary
 import com.sarvix.app.utils.Resource

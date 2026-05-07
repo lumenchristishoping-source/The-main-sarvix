@@ -164,7 +164,16 @@ class SarvixMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendTokenToServer(token: String) {
-        // TODO: Implement token registration with your backend
-        // This should send the FCM token to your server for the current user
+        val auth = com.google.firebase.auth.FirebaseAuth.getInstance()
+        val firestore = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+        val userId = auth.currentUser?.uid
+
+        if (userId != null) {
+            firestore.collection("users")
+                .document(userId)
+                .update("fcmToken", token)
+                .addOnSuccessListener { Timber.d("FCM token updated successfully") }
+                .addOnFailureListener { e -> Timber.e(e, "Failed to update FCM token") }
+        }
     }
 }

@@ -49,6 +49,9 @@ class ChatViewModel @Inject constructor(
     private val _currentChatId = MutableStateFlow<String?>(null)
     val currentChatId: StateFlow<String?> = _currentChatId
 
+    val currentUserId: String
+        get() = authRepository.getCurrentUserId()
+
     fun loadChats() {
         chatRepository.getChats(authRepository.getCurrentUserId())
             .onEach { _chatsState.value = it }

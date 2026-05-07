@@ -45,7 +45,13 @@ class PostViewModel @Inject constructor(
 
     fun createTextPost(content: String, readSpace: ReadSpace = _currentReadSpace.value) {
         postRepository.createTextPost(content, readSpace)
-            .onEach { _createPostState.value = it }
+            .onEach { resource ->
+                _createPostState.value = when (resource) {
+                    is Resource.Success -> Resource.Success(resource.data as Post)
+                    is Resource.Error -> Resource.Error(resource.message ?: "Error")
+                    is Resource.Loading -> Resource.Loading()
+                }
+            }
             .launchIn(viewModelScope)
     }
 
@@ -56,7 +62,13 @@ class PostViewModel @Inject constructor(
         readSpace: ReadSpace = _currentReadSpace.value
     ) {
         postRepository.createVideoPost(videoUri, caption, duration, readSpace)
-            .onEach { _createPostState.value = it }
+            .onEach { resource ->
+                _createPostState.value = when (resource) {
+                    is Resource.Success -> Resource.Success(resource.data as Post)
+                    is Resource.Error -> Resource.Error(resource.message ?: "Error")
+                    is Resource.Loading -> Resource.Loading()
+                }
+            }
             .launchIn(viewModelScope)
     }
 
