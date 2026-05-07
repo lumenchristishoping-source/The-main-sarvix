@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "317593835838",
+    "project_id": "sarvix-21eaf",
+    "storage_bucket": "sarvix-21eaf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317593835838:android:39352d5542469836f7346f",
+        "android_client_info": {
+          "package_name": "com.sarvix.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZE6mofFOLFV__npdUimHSvrtPMSVzEQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
