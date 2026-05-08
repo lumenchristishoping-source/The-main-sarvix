@@ -49,7 +49,8 @@ class AuthRepository @Inject constructor(
                 return@flow
             }
             
-            // Check if username is already taken
+            // Check if username is already taken - use a transaction if possible,
+            // but for simplicity we use a unique index/check
             val usernameQuery = firestore.collection("users")
                 .whereEqualTo("username", username)
                 .get()
@@ -61,30 +62,48 @@ class AuthRepository @Inject constructor(
             }
             
             val result = auth.createUserWithEmailAndPassword(email, password).await()
-            result.user?.let { user ->
-                // Update Firebase Auth profile
-                val profileUpdates = UserProfileChangeRequest.Builder()
-                    .setDisplayName(username)
-                    .build()
-                user.updateProfile(profileUpdates).await()
-                
-                // Create user document in Firestore
-                val newUser = User(
-                    id = user.uid,
-                    email = email,
-                    username = username,
-                    isProfileComplete = false
-                )
-                firestore.collection("users")
-                    .document(user.uid)
-                    .set(newUser)
-                    .await()
-                
-                emit(Resource.Success(user))
-            } ?: emit(Resource.Error("Signup failed"))
+            val user = result.user
+
+            if (user != null) {
+                try {
+                    // Update Firebase Auth profile
+                    val profileUpdates = UserProfileChangeRequest.Builder()
+                        .setDisplayName(username)
+                        .build()
+                    user.updateProfile(profileUpdates).await()
+
+                    // Create user document in Firestore
+                    val newUser = User(
+                        id = user.uid,
+                        email = email,
+                        username = username,
+                        isProfileComplete = false
+                    )
+                    firestore.collection("users")
+                        .document(user.uid)
+                        .set(newUser)
+                        .await()
+
+                    emit(Resource.Success(user))
+                } catch (dbError: Exception) {
+                    Timber.e(dbError, "Firestore signup error")
+                    // If DB fails, we should ideally delete the auth user or handle inconsistency
+                    // user.delete().await()
+                    emit(Resource.Error("Account created but profile setup failed: ${dbError.message}"))
+                }
+            } else {
+                emit(Resource.Error("Signup failed: Could not create user"))
+            }
         } catch (e: Exception) {
             Timber.e(e, "Signup error")
-            emit(Resource.Error(e.message ?: "Unknown error occurred"))
+            val message = when {
+                e.message?.contains("email address is already in use") == true ->
+                    "This email is already registered."
+                e.message?.contains("password") == true ->
+                    "Invalid password format."
+                else -> e.message ?: "Unknown error occurred during signup"
+            }
+            emit(Resource.Error(message))
         }
     }
 

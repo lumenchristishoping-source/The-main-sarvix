@@ -1,5 +1,6 @@
 package com.sarvix.app.ui.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
@@ -9,14 +10,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.sarvix.app.data.repository.AuthRepository
+import com.sarvix.app.R
 import com.sarvix.app.ui.theme.Primary
 import kotlinx.coroutines.delay
-import javax.inject.Inject
 
 @Composable
 fun SplashScreen(
@@ -31,8 +31,7 @@ fun SplashScreen(
         
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            // Check if profile is complete
-            // For now, navigate to main (profile check will happen there)
+            // In a real app, we'd check profile completeness here via a repository call
             onNavigateToMain()
         } else {
             onNavigateToLogin()
@@ -49,6 +48,12 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.logo),
+                contentDescription = "Sarvix Logo",
+                modifier = Modifier.size(120.dp)
+            )
+            Spacer(modifier = Modifier.height(24.dp))
             Text(
                 text = "Sarvix",
                 style = MaterialTheme.typography.displayLarge,
@@ -61,7 +66,7 @@ fun SplashScreen(
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(48.dp))
             CircularProgressIndicator(
                 color = Primary
             )

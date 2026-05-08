@@ -1,5 +1,6 @@
 package com.sarvix.app.ui.screens.main
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Chat
@@ -9,20 +10,19 @@ import androidx.compose.material.icons.outlined.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.sarvix.app.R
 import com.sarvix.app.ui.navigation.Screen
 import com.sarvix.app.ui.screens.chat.ChatsScreen
 import com.sarvix.app.ui.screens.match.MatchesScreen
 import com.sarvix.app.ui.screens.post.SarvixReadsScreen
 import com.sarvix.app.ui.screens.profile.ProfileScreen
-import com.sarvix.app.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 
 data class NavigationItem(
@@ -77,22 +77,30 @@ fun MainScreen(
             ModalDrawerSheet {
                 Spacer(modifier = Modifier.height(24.dp))
                 
-                // App Logo/Title
-                Text(
-                    text = "Sarvix",
-                    style = MaterialTheme.typography.headlineLarge,
+                // App Logo and Title in Drawer
+                Row(
                     modifier = Modifier.padding(horizontal = 16.dp),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                
-                Spacer(modifier = Modifier.height(8.dp))
-                
-                Text(
-                    text = "Clarity in Communication",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
+                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.logo),
+                        contentDescription = "Logo",
+                        modifier = Modifier.size(48.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Column {
+                        Text(
+                            text = "Sarvix",
+                            style = MaterialTheme.typography.headlineMedium,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                        Text(
+                            text = "Communication Clarity",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
                 
                 Spacer(modifier = Modifier.height(24.dp))
                 
@@ -189,7 +197,18 @@ fun MainScreen(
                 modifier = Modifier.padding(paddingValues)
             ) {
                 composable(Screen.Chats.route) {
-                    ChatsScreen(navController = navController)
+                    ChatsScreen(
+                        navController = navController,
+                        onFindPeople = {
+                            mainNavController.navigate(Screen.Matches.route) {
+                                popUpTo(mainNavController.graph.startDestinationId) {
+                                    saveState = true
+                                }
+                                launchSingleTop = true
+                                restoreState = true
+                            }
+                        }
+                    )
                 }
                 composable(Screen.Matches.route) {
                     MatchesScreen(navController = navController)

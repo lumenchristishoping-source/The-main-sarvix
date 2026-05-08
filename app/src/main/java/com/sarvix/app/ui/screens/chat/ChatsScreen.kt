@@ -27,6 +27,7 @@ import java.util.*
 @Composable
 fun ChatsScreen(
     navController: NavController,
+    onFindPeople: () -> Unit,
     viewModel: ChatViewModel = hiltViewModel()
 ) {
     val chatsState by viewModel.chatsState.collectAsState()
@@ -51,10 +52,7 @@ fun ChatsScreen(
                 val chats = state.data ?: emptyList()
                 if (chats.isEmpty()) {
                     EmptyChatsView(
-                        onFindPeople = {
-                            // Navigate to matches
-                            navController.navigate(Screen.Matches.route)
-                        }
+                        onFindPeople = onFindPeople
                     )
                 } else {
                     LazyColumn(

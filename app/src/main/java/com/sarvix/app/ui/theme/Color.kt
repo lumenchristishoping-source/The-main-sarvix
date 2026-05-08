@@ -2,57 +2,65 @@ package com.sarvix.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Sarvix Brand Colors - Minimal, Clean Palette
-val Primary = Color(0xFF6366F1) // Indigo 500
-val PrimaryDark = Color(0xFF4F46E5) // Indigo 600
-val PrimaryLight = Color(0xFF818CF8) // Indigo 400
+// Sarvix Neon Palette
+val NeonCyan = Color(0xFF00F2FF)
+val NeonPurple = Color(0xFF7000FF)
+val NeonPink = Color(0xFFFF00E5)
+val DarkBackground = Color(0xFF0A0A1A)
+val DarkSurface = Color(0xFF12122A)
+val DarkSurfaceVariant = Color(0xFF1E1E3F)
 
-val Secondary = Color(0xFF10B981) // Emerald 500
-val SecondaryDark = Color(0xFF059669) // Emerald 600
+// Primary Brand Colors (Using Neon Purple/Cyan)
+val Primary = NeonPurple
+val PrimaryDark = Color(0xFF5000B8)
+val PrimaryLight = Color(0xFF9D4DFF)
 
-val Background = Color(0xFFFAFAFA) // Neutral 50
-val Surface = Color(0xFFFFFFFF) // White
-val SurfaceVariant = Color(0xFFF3F4F6) // Gray 100
+val Secondary = NeonCyan
+val SecondaryDark = Color(0xFF00B8C2)
+
+val Background = DarkBackground
+val Surface = DarkSurface
+val SurfaceVariant = DarkSurfaceVariant
 
 val OnPrimary = Color(0xFFFFFFFF)
-val OnSecondary = Color(0xFFFFFFFF)
-val OnBackground = Color(0xFF111827) // Gray 900
-val OnSurface = Color(0xFF1F2937) // Gray 800
-val OnSurfaceVariant = Color(0xFF6B7280) // Gray 500
+val OnSecondary = Color(0xFF0A0A1A)
+val OnBackground = Color(0xFFF0F0F0)
+val OnSurface = Color(0xFFFFFFFF)
+val OnSurfaceVariant = Color(0xFFB0B0CC)
 
-val Error = Color(0xFFEF4444) // Red 500
+val Error = Color(0xFFFF3D71)
 val OnError = Color(0xFFFFFFFF)
 
-val Success = Color(0xFF10B981) // Emerald 500
-val Warning = Color(0xFFF59E0B) // Amber 500
-val Info = Color(0xFF3B82F6) // Blue 500
+val Success = Color(0xFF00E096)
+val Warning = Color(0xFFFFAA00)
+val Info = Color(0xFF0095FF)
 
-// Intent Tag Colors
-val IntentJoke = Color(0xFFFFD700) // Gold
-val IntentSerious = Color(0xFF708090) // Slate Gray
-val IntentAdvice = Color(0xFF32CD32) // Lime Green
-val IntentVent = Color(0xFFFF6347) // Tomato
-val IntentRant = Color(0xFFFF4500) // Orange Red
+// Intent Tag Colors (Neon versions)
+val IntentJoke = Color(0xFFFFFF00) // Neon Yellow
+val IntentSerious = Color(0xFFB0B0CC) // Muted Silver
+val IntentAdvice = Color(0xFF00FF00) // Neon Green
+val IntentVent = Color(0xFFFF5E00) // Neon Orange
+val IntentRant = Color(0xFFFF0000) // Neon Red
 
-// Mood Colors
-val MoodHappy = Color(0xFFFCD34D) // Amber 300
-val MoodExcited = Color(0xFFF472B6) // Pink 400
-val MoodCalm = Color(0xFF6EE7B7) // Emerald 300
-val MoodThoughtful = Color(0xFF93C5FD) // Blue 300
-val MoodTired = Color(0xFFD1D5DB) // Gray 300
-val MoodStressed = Color(0xFFFCA5A5) // Red 300
-val MoodInspired = Color(0xFFC4B5FD) // Violet 300
-val MoodFocused = Color(0xFF67E8F9) // Cyan 300
-val MoodSocial = Color(0xFFA78BFA) // Purple 400
-val MoodCreative = Color(0xFFFB923C) // Orange 400
-val MoodReflective = Color(0xFF818CF8) // Indigo 400
-val MoodNeutral = Color(0xFF9CA3AF) // Gray 400
+// Mood Colors (Updated for Dark Theme)
+val MoodHappy = Color(0xFFFFFF00)
+val MoodExcited = NeonPink
+val MoodCalm = Color(0xFF00FFCC)
+val MoodThoughtful = Color(0xFF00CCFF)
+val MoodTired = Color(0xFF444466)
+val MoodStressed = Color(0xFFFF3366)
+val MoodInspired = Color(0xFFCC00FF)
+val MoodFocused = NeonCyan
+val MoodSocial = Color(0xFF9D4DFF)
+val MoodCreative = Color(0xFFFF9900)
+val MoodReflective = Color(0xFF6666FF)
+val MoodNeutral = Color(0xFF8888AA)
 
 // Chat Bubble Colors
-val ChatBubbleSent = Color(0xFF6366F1)
-val ChatBubbleReceived = Color(0xFFF3F4F6)
+val ChatBubbleSent = NeonPurple
+val ChatBubbleReceived = DarkSurfaceVariant
 val ChatTextSent = Color(0xFFFFFFFF)
-val ChatTextReceived = Color(0xFF1F2937)
+val ChatTextReceived = Color(0xFFFFFFFF)
 
 // Divider
-val DividerColor = Color(0xFFE5E7EB) // Gray 200
+val DividerColor = Color(0xFF2D2D5A)
