@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -199,7 +200,7 @@ fun UserProfileContent(
                             onClick = onStartChat,
                             modifier = Modifier.weight(1f)
                         ) {
-                            Icon(Icons.Default.Chat, contentDescription = null)
+                    Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null)
                             Spacer(modifier = Modifier.width(8.dp))
                             Text("Message")
                         }

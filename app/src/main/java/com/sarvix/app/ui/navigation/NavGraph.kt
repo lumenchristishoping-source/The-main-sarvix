@@ -22,6 +22,8 @@ import com.sarvix.app.ui.screens.post.SarvixReadsScreen
 import com.sarvix.app.ui.screens.profile.EditProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileSetupScreen
+import com.sarvix.app.ui.screens.settings.BlockedUsersScreen
+import com.sarvix.app.ui.screens.settings.PrivacyScreen
 import com.sarvix.app.ui.screens.settings.SettingsScreen
 import com.sarvix.app.ui.screens.user.UserProfileScreen
 import com.sarvix.app.viewmodel.AuthViewModel
@@ -35,9 +37,6 @@ fun NavGraph(
     val authViewModel: AuthViewModel = hiltViewModel()
     val profileViewModel: ProfileViewModel = hiltViewModel()
     
-    val loginState by authViewModel.loginState.collectAsState()
-    val signupState by authViewModel.signupState.collectAsState()
-    val profileState by profileViewModel.profileState.collectAsState()
 
     NavHost(
         navController = navController,
@@ -55,15 +54,18 @@ fun NavGraph(
                     navController.navigate(Screen.Main.route) {
                         popUpTo(Screen.Splash.route) { inclusive = true }
                     }
-                },
-                onNavigateToProfileSetup = {
-                    navController.navigate(Screen.ProfileSetup.route) {
-                        popUpTo(Screen.Splash.route) { inclusive = true }
-                    }
                 }
             )
         }
         
+        composable(Screen.Privacy.route) {
+            PrivacyScreen(navController = navController)
+        }
+
+        composable(Screen.BlockedUsers.route) {
+            BlockedUsersScreen(navController = navController)
+        }
+
         composable(Screen.Login.route) {
             LoginScreen(
                 viewModel = authViewModel,

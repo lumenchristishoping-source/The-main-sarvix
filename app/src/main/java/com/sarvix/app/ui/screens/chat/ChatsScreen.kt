@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -41,12 +41,7 @@ fun ChatsScreen(
     ) {
         when (val state = chatsState) {
             is Resource.Loading -> {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
+                // Remove loading indicator, show blank state as requested
             }
             is Resource.Success -> {
                 val chats = state.data ?: emptyList()
@@ -220,7 +215,7 @@ fun EmptyChatsView(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            imageVector = Icons.Default.Chat,
+            imageVector = Icons.AutoMirrored.Filled.Chat,
             contentDescription = null,
             modifier = Modifier.size(80.dp),
             tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)

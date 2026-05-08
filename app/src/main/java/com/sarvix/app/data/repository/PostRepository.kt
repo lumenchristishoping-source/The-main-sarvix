@@ -55,7 +55,7 @@ class PostRepository @Inject constructor(
                 when (type) {
                     PostType.TEXT -> doc.toObject(TextPost::class.java)
                     PostType.VIDEO -> doc.toObject(VideoPost::class.java)
-                    else -> null
+                    null -> null
                 }
             }
             
@@ -103,10 +103,17 @@ class PostRepository @Inject constructor(
         emit(Resource.Loading())
         try {
             val currentUserId = authRepository.getCurrentUserId()
-            val currentUser = authRepository.getUserById(currentUserId)
             
+            // Try to get user with a small retry logic if not found immediately
+            var currentUser = authRepository.getUserById(currentUserId)
             if (currentUser == null) {
-                emit(Resource.Error("User not found"))
+                Timber.w("User not found initially, retrying...")
+                kotlinx.coroutines.delay(1000)
+                currentUser = authRepository.getUserById(currentUserId)
+            }
+
+            if (currentUser == null) {
+                emit(Resource.Error("User profile not found. Please complete your profile setup."))
                 return@flow
             }
             
@@ -147,10 +154,17 @@ class PostRepository @Inject constructor(
             }
             
             val currentUserId = authRepository.getCurrentUserId()
-            val currentUser = authRepository.getUserById(currentUserId)
+
+            // Try to get user with a small retry logic if not found immediately
+            var currentUser = authRepository.getUserById(currentUserId)
+            if (currentUser == null) {
+                Timber.w("User not found initially, retrying...")
+                kotlinx.coroutines.delay(1000)
+                currentUser = authRepository.getUserById(currentUserId)
+            }
             
             if (currentUser == null) {
-                emit(Resource.Error("User not found"))
+                emit(Resource.Error("User profile not found. Please complete your profile setup."))
                 return@flow
             }
             
@@ -248,7 +262,7 @@ class PostRepository @Inject constructor(
                 when (type) {
                     PostType.TEXT -> doc.toObject(TextPost::class.java)
                     PostType.VIDEO -> doc.toObject(VideoPost::class.java)
-                    else -> null
+                    null -> null
                 }
             }
             

@@ -6,9 +6,9 @@ import androidx.compose.ui.graphics.Color
 val NeonCyan = Color(0xFF00F2FF)
 val NeonPurple = Color(0xFF7000FF)
 val NeonPink = Color(0xFFFF00E5)
-val DarkBackground = Color(0xFF0A0A1A)
-val DarkSurface = Color(0xFF12122A)
-val DarkSurfaceVariant = Color(0xFF1E1E3F)
+val DarkBackground = Color(0xFF0A0A0A)
+val DarkSurface = Color(0xFF121212)
+val DarkSurfaceVariant = Color(0xFF1E1E1E)
 
 // Primary Brand Colors (Using Neon Purple/Cyan)
 val Primary = NeonPurple

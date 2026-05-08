@@ -21,8 +21,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SplashScreen(
     onNavigateToLogin: () -> Unit,
-    onNavigateToMain: () -> Unit,
-    onNavigateToProfileSetup: () -> Unit
+    onNavigateToMain: () -> Unit
 ) {
     val auth = FirebaseAuth.getInstance()
     
@@ -67,9 +66,6 @@ fun SplashScreen(
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
             Spacer(modifier = Modifier.height(48.dp))
-            CircularProgressIndicator(
-                color = Primary
-            )
         }
     }
 }

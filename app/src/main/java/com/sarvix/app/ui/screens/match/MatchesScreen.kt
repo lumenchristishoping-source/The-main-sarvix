@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -140,12 +141,7 @@ fun DiscoverContent(
 ) {
     when (val state = suggestionsState) {
         is Resource.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            // Remove loading indicator, show blank state as requested
         }
         is Resource.Success -> {
             val suggestions = state.data ?: emptyList()
@@ -195,12 +191,7 @@ fun MyMatchesContent(
 ) {
     when (val state = matchesState) {
         is Resource.Loading -> {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+            // Remove loading indicator, show blank state as requested
         }
         is Resource.Success -> {
             val matches = state.data ?: emptyList()
@@ -496,7 +487,7 @@ fun MatchListItem(
             // Chat Button
             IconButton(onClick = onStartChat) {
                 Icon(
-                    imageVector = Icons.Default.Chat,
+                    imageVector = Icons.AutoMirrored.Filled.Chat,
                     contentDescription = "Start Chat",
                     tint = Primary
                 )

@@ -18,6 +18,8 @@ sealed class Screen(val route: String) {
     object Profile : Screen("profile")
     object EditProfile : Screen("edit_profile")
     object Settings : Screen("settings")
+    object Privacy : Screen("privacy")
+    object BlockedUsers : Screen("blocked_users")
     
     object NewPost : Screen("new_post")
     object UserProfile : Screen("user/{userId}") {

@@ -75,6 +75,11 @@ fun MainScreen(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
+                com.sarvix.app.ui.components.AnimatedGradientBorder(
+                    borderWidth = 1.dp,
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp)
+                ) {
+                    Column(modifier = Modifier.fillMaxHeight()) {
                 Spacer(modifier = Modifier.height(24.dp))
                 
                 // App Logo and Title in Drawer
@@ -153,22 +158,20 @@ fun MainScreen(
                 )
                 
                 Spacer(modifier = Modifier.height(8.dp))
+                    }
+                }
             }
         }
     ) {
         Scaffold(
             topBar = {
-                TopAppBar(
-                    title = { 
-                        Text(
-                            when (currentRoute) {
-                                Screen.Chats.route -> "Chats"
-                                Screen.Matches.route -> "Matches"
-                                Screen.SarvixReads.route -> "Sarvix Reads"
-                                Screen.Profile.route -> "Profile"
-                                else -> "Sarvix"
-                            }
-                        )
+                com.sarvix.app.ui.components.PillHeader(
+                    title = when (currentRoute) {
+                        Screen.Chats.route -> "Chats"
+                        Screen.Matches.route -> "Matches"
+                        Screen.SarvixReads.route -> "Sarvix Reads"
+                        Screen.Profile.route -> "Profile"
+                        else -> "Sarvix"
                     },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {

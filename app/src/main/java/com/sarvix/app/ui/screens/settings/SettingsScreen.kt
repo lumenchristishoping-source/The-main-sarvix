@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.Chat
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -12,6 +13,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.sarvix.app.ui.components.PillHeader
+import com.sarvix.app.ui.navigation.Screen
 import com.sarvix.app.ui.theme.Error
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,8 +27,8 @@ fun SettingsScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Settings") },
+            PillHeader(
+                title = "Settings",
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
@@ -55,7 +58,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.BlockedUsers.route)
+                        }
                     )
                     
                     HorizontalDivider()
@@ -68,7 +73,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.Privacy.route)
+                        }
                     )
                 }
             }
@@ -98,7 +105,7 @@ fun SettingsScreen(
                     ListItem(
                         headlineContent = { Text("Message Notifications") },
                         leadingContent = {
-                            Icon(Icons.Default.Chat, contentDescription = null)
+                            Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null)
                         },
                         trailingContent = {
                             Switch(
