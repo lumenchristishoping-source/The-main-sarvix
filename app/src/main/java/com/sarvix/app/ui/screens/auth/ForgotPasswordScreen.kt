@@ -1,4 +1,4 @@
-package com.sarvix.app.ui.screens
+package com.sarvix.app.ui.screens.auth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions

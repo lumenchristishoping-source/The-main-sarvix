@@ -1,4 +1,4 @@
-package com.sarvix.app.ui.screens
+package com.sarvix.app.ui.screens.auth
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

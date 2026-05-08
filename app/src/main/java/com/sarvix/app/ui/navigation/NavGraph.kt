@@ -10,6 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.sarvix.app.ui.screens.*
+import com.sarvix.app.ui.screens.auth.ForgotPasswordScreen
+import com.sarvix.app.ui.screens.auth.LoginScreen
+import com.sarvix.app.ui.screens.auth.SignupScreen
 import com.sarvix.app.ui.screens.chat.ChatDetailScreen
 import com.sarvix.app.ui.screens.chat.ChatsScreen
 import com.sarvix.app.ui.screens.main.MainScreen
@@ -19,6 +22,8 @@ import com.sarvix.app.ui.screens.post.SarvixReadsScreen
 import com.sarvix.app.ui.screens.profile.EditProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileSetupScreen
+import com.sarvix.app.ui.screens.settings.SettingsScreen
+import com.sarvix.app.ui.screens.user.UserProfileScreen
 import com.sarvix.app.viewmodel.AuthViewModel
 import com.sarvix.app.viewmodel.ProfileViewModel
 

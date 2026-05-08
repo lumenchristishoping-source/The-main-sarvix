@@ -2,9 +2,10 @@ package com.sarvix.app.utils
 
 object ValidationUtils {
     
+    private val EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$".toRegex()
+
     fun isValidEmail(email: String): Boolean {
-        return email.isNotBlank() && 
-               android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return email.isNotBlank() && EMAIL_REGEX.matches(email)
     }
     
     fun isValidPassword(password: String): Boolean {

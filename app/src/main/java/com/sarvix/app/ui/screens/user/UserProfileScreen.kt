@@ -1,4 +1,4 @@
-package com.sarvix.app.ui.screens
+package com.sarvix.app.ui.screens.user
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
