@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sarvix</string>
+    
+    <!-- Auth -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign In</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="join_sarvix">Join Sarvix today</string>
+    <string name="username">Username (@handle)</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="already_have_account">Already have an account?</string>
+    
+    <!-- Profile -->
+    <string name="complete_your_profile">Complete Your Profile</string>
+    <string name="display_name">Display Name</string>
+    <string name="bio">Bio</string>
+    <string name="bio_hint">Tell us about yourself</string>
+    <string name="interests">Interests</string>
+    <string name="select_interests">Select at least 3 interests</string>
+    <string name="country">Country</string>
+    <string name="language">Language</string>
+    <string name="current_mood">Current Mood</string>
+    <string name="save">Save</string>
+    <string name="edit_profile">Edit Profile</string>
+    
+    <!-- Chat -->
+    <string name="chats">Chats</string>
+    <string name="type_message">Type a message…</string>
+    <string name="send">Send</string>
+    <string name="clarify">Clarify</string>
+    <string name="translate">Translate</string>
+    <string name="show_original">Show Original</string>
+    <string name="intent_tag">Intent Tag</string>
+    <string name="no_conversations">No conversations yet</string>
+    <string name="start_matching">Start matching with people to begin conversations</string>
+    <string name="find_people">Find People</string>
+    
+    <!-- Matches -->
+    <string name="matches">Matches</string>
+    <string name="discover">Discover</string>
+    <string name="my_matches">My Matches</string>
+    <string name="local">Local</string>
+    <string name="global">Global</string>
+    <string name="match_percentage">%1$d%% match</string>
+    <string name="shared_interests">Shared Interests</string>
+    <string name="connect">Connect</string>
+    <string name="pass">Pass</string>
+    <string name="message">Message</string>
+    <string name="no_suggestions">No suggestions right now</string>
+    <string name="check_back_later">Check back later for new people to connect with</string>
+    <string name="no_matches_yet">No matches yet</string>
+    <string name="start_connecting">Start connecting with people in the Discover tab</string>
+    
+    <!-- Sarvix Reads -->
+    <string name="sarvix_reads">Sarvix Reads</string>
+    <string name="international">International</string>
+    <string name="new_post">New Post</string>
+    <string name="whats_on_your_mind">What\'s on your mind?</string>
+    <string name="post">Post</string>
+    <string name="text">Text</string>
+    <string name="video">Video</string>
+    <string name="no_posts">No posts yet</string>
+    <string name="be_first_to_share">Be the first to share something with the community</string>
+    <string name="create_post">Create Post</string>
+    <string name="report">Report</string>
+    
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="account">Account</string>
+    <string name="notifications">Notifications</string>
+    <string name="privacy">Privacy</string>
+    <string name="premium">Premium</string>
+    <string name="about">About</string>
+    <string name="log_out">Log Out</string>
+    <string name="log_out_confirm">Are you sure you want to log out?</string>
+    <string name="cancel">Cancel</string>
+    
+    <!-- Errors -->
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_network">Network error. Please check your connection.</string>
+    <string name="error_invalid_email">Please enter a valid email</string>
+    <string name="error_invalid_password">Password must be at least 8 characters</string>
+    <string name="error_username_format">Username must start with @</string>
+    <string name="error_passwords_match">Passwords don\'t match</string>
+    
+    <!-- Intent Tags -->
+    <string name="intent_joke">Joke</string>
+    <string name="intent_serious">Serious</string>
+    <string name="intent_advice">Advice</string>
+    <string name="intent_vent">Vent</string>
+    <string name="intent_rant">Rant</string>
+</resources>

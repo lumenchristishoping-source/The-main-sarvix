@@ -1,0 +1,11 @@
+# Local configuration file (sdk path, etc)
+# Copy this file to local.properties and update the paths
+
+# macOS/Linux
+sdk.dir=/Users/YOUR_USERNAME/Library/Android/sdk
+
+# Windows
+# sdk.dir=C\\:\\Users\\YOUR_USERNAME\\AppData\\Local\\Android\\Sdk
+
+# NDK (optional)
+# ndk.dir=/Users/YOUR_USERNAME/Library/Android/sdk/ndk/VERSION
