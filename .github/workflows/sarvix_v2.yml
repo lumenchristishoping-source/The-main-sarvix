@@ -28,7 +28,10 @@ jobs:
       
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
-
+      
+    - name: Fix repository settings
+      run: sed -i 's/FAIL_ON_PROJECT_REPOS/PREFER_SETTINGS/' settings.gradle.kts
+   
     - name: Build Debug APK
       run: ./gradlew assembleDebug
     
