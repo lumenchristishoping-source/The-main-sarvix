@@ -143,7 +143,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.BlockedUsers.route)
+                        }
                     )
                     
                     HorizontalDivider()
@@ -156,7 +158,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.Privacy.route)
+                        }
                     )
                 }
             }
@@ -171,9 +175,11 @@ fun SettingsScreen(
                             Icon(Icons.Default.EmojiEmotions, contentDescription = null)
                         },
                         trailingContent = {
-                            Button(onClick = { }) {
-                                Text("Upgrade")
-                            }
+                            com.sarvix.app.ui.components.GradientButton(
+                                text = "Upgrade",
+                                onClick = { },
+                                modifier = Modifier.height(40.dp)
+                            )
                         },
                         modifier = Modifier.clickable { }
                     )
@@ -187,9 +193,11 @@ fun SettingsScreen(
                             Icon(Icons.Default.Animation, contentDescription = null)
                         },
                         trailingContent = {
-                            Button(onClick = { }) {
-                                Text("Upgrade")
-                            }
+                            com.sarvix.app.ui.components.GradientButton(
+                                text = "Upgrade",
+                                onClick = { },
+                                modifier = Modifier.height(40.dp)
+                            )
                         },
                         modifier = Modifier.clickable { }
                     )
@@ -203,9 +211,11 @@ fun SettingsScreen(
                             Icon(Icons.Default.Psychology, contentDescription = null)
                         },
                         trailingContent = {
-                            Button(onClick = { }) {
-                                Text("Upgrade")
-                            }
+                            com.sarvix.app.ui.components.GradientButton(
+                                text = "Upgrade",
+                                onClick = { },
+                                modifier = Modifier.height(40.dp)
+                            )
                         },
                         modifier = Modifier.clickable { }
                     )
@@ -223,7 +233,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.TermsOfService.route)
+                        }
                     )
                     
                     HorizontalDivider()
@@ -236,7 +248,9 @@ fun SettingsScreen(
                         trailingContent = {
                             Icon(Icons.Default.ChevronRight, contentDescription = null)
                         },
-                        modifier = Modifier.clickable { }
+                        modifier = Modifier.clickable {
+                            navController.navigate(Screen.PrivacyPolicy.route)
+                        }
                     )
                     
                     HorizontalDivider()

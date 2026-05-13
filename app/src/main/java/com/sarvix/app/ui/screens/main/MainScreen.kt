@@ -74,12 +74,16 @@ fun MainScreen(
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
-            ModalDrawerSheet {
+            ModalDrawerSheet(
+                drawerContainerColor = MaterialTheme.colorScheme.surface,
+                drawerShape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp)
+            ) {
                 com.sarvix.app.ui.components.AnimatedGradientBorder(
                     borderWidth = 1.dp,
-                    shape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp)
+                    shape = androidx.compose.foundation.shape.RoundedCornerShape(0.dp),
+                    rightEdgeOnly = true
                 ) {
-                    Column(modifier = Modifier.fillMaxHeight()) {
+                    Column(modifier = Modifier.fillMaxHeight().width(300.dp)) {
                 Spacer(modifier = Modifier.height(24.dp))
                 
                 // App Logo and Title in Drawer

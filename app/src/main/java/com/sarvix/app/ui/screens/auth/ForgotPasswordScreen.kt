@@ -29,8 +29,8 @@ fun ForgotPasswordScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Reset Password") },
+            com.sarvix.app.ui.components.PillHeader(
+                title = "Reset Password",
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
@@ -87,22 +87,13 @@ fun ForgotPasswordScreen(
             Spacer(modifier = Modifier.height(24.dp))
             
             // Send Button
-            Button(
+            com.sarvix.app.ui.components.GradientButton(
+                text = "Send Reset Link",
                 onClick = { viewModel.sendPasswordResetEmail(email) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                enabled = passwordResetState !is Resource.Loading
-            ) {
-                if (passwordResetState is Resource.Loading) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                } else {
-                    Text("Send Reset Link")
-                }
-            }
+                modifier = Modifier.fillMaxWidth(),
+                enabled = passwordResetState !is Resource.Loading,
+                loading = passwordResetState is Resource.Loading
+            )
             
             // Success Message
             if (passwordResetState is Resource.Success) {

@@ -445,10 +445,10 @@ fun EmptyPostsView(
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        Button(onClick = onCreatePost) {
-            Icon(Icons.Default.Add, contentDescription = null)
-            Spacer(modifier = Modifier.width(8.dp))
-            Text("Create Post")
-        }
+        com.sarvix.app.ui.components.GradientButton(
+            text = "Create Post",
+            onClick = onCreatePost,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

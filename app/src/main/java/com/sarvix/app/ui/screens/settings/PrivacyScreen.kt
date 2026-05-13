@@ -74,12 +74,11 @@ fun PrivacyScreen(
 
             item {
                 Spacer(modifier = Modifier.height(32.dp))
-                Button(
+                com.sarvix.app.ui.components.GradientButton(
+                    text = "Export My Data",
                     onClick = { /* Handle data export */ },
                     modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text("Export My Data")
-                }
+                )
                 Spacer(modifier = Modifier.height(16.dp))
                 OutlinedButton(
                     onClick = { /* Handle account deletion */ },

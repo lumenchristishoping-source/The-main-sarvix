@@ -1,6 +1,9 @@
 @file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
 package com.sarvix.app.ui.screens.profile
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -65,11 +68,17 @@ fun EditProfileScreen(
             navController.navigateUp()
         }
     }
+
+    val imagePickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        uri?.let { viewModel.uploadProfilePicture(it) }
+    }
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Edit Profile") },
+            com.sarvix.app.ui.components.PillHeader(
+                title = "Edit Profile",
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
@@ -96,7 +105,7 @@ fun EditProfileScreen(
                                 strokeWidth = 2.dp
                             )
                         } else {
-                            Text("Save")
+                            Text("Save", color = NeonCyan)
                         }
                     }
                 }
@@ -115,7 +124,7 @@ fun EditProfileScreen(
                 ProfilePictureSection(
                     profileState = profileState,
                     uploadState = uploadState,
-                    onUploadImage = { /* TODO: Image picker */ }
+                    onUploadImage = { imagePickerLauncher.launch("image/*") }
                 )
             }
             
@@ -234,8 +243,7 @@ fun EditProfileScreen(
                         
                         androidx.compose.foundation.layout.FlowRow(
                             modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             availableInterests.forEach { interest ->
                                 val isSelected = selectedInterests.contains(interest)

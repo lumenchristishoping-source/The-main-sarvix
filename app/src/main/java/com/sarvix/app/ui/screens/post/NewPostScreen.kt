@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import com.sarvix.app.data.model.Post
 import com.sarvix.app.data.model.PostType
 import com.sarvix.app.data.model.ReadSpace
+import com.sarvix.app.ui.theme.NeonCyan
 import com.sarvix.app.ui.theme.Primary
 import com.sarvix.app.utils.Resource
 import com.sarvix.app.viewmodel.PostViewModel
@@ -44,8 +45,8 @@ fun NewPostScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("New Post") },
+            com.sarvix.app.ui.components.PillHeader(
+                title = "New Post",
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
@@ -69,7 +70,7 @@ fun NewPostScreen(
                                 strokeWidth = 2.dp
                             )
                         } else {
-                            Text("Post")
+                            Text("Post", color = NeonCyan)
                         }
                     }
                 }

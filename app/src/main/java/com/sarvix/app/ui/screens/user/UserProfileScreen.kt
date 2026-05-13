@@ -96,6 +96,7 @@ fun UserProfileScreen(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun UserProfileContent(
     user: User,
@@ -196,14 +197,11 @@ fun UserProfileContent(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Button(
+                        com.sarvix.app.ui.components.GradientButton(
+                            text = "Message",
                             onClick = onStartChat,
                             modifier = Modifier.weight(1f)
-                        ) {
-                    Icon(Icons.AutoMirrored.Filled.Chat, contentDescription = null)
-                            Spacer(modifier = Modifier.width(8.dp))
-                            Text("Message")
-                        }
+                        )
                         
                         Spacer(modifier = Modifier.width(16.dp))
                         

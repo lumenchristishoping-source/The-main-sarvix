@@ -103,17 +103,13 @@ class PostRepository @Inject constructor(
         emit(Resource.Loading())
         try {
             val currentUserId = authRepository.getCurrentUserId()
-            
-            // Try to get user with a small retry logic if not found immediately
-            var currentUser = authRepository.getUserById(currentUserId)
-            if (currentUser == null) {
-                Timber.w("User not found initially, retrying...")
-                kotlinx.coroutines.delay(1000)
-                currentUser = authRepository.getUserById(currentUserId)
-            }
+
+            // Robust check: if profile is not complete, we should check Firestore again
+            // but instead of just a delay, we check for null.
+            val currentUser = authRepository.getUserById(currentUserId)
 
             if (currentUser == null) {
-                emit(Resource.Error("User profile not found. Please complete your profile setup."))
+                emit(Resource.Error("Your profile information could not be retrieved. Please try again or re-login."))
                 return@flow
             }
             
@@ -154,17 +150,10 @@ class PostRepository @Inject constructor(
             }
             
             val currentUserId = authRepository.getCurrentUserId()
-
-            // Try to get user with a small retry logic if not found immediately
-            var currentUser = authRepository.getUserById(currentUserId)
-            if (currentUser == null) {
-                Timber.w("User not found initially, retrying...")
-                kotlinx.coroutines.delay(1000)
-                currentUser = authRepository.getUserById(currentUserId)
-            }
+            val currentUser = authRepository.getUserById(currentUserId)
             
             if (currentUser == null) {
-                emit(Resource.Error("User profile not found. Please complete your profile setup."))
+                emit(Resource.Error("Your profile information could not be retrieved. Please try again."))
                 return@flow
             }
             

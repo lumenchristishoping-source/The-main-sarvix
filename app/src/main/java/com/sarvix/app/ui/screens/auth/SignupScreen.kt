@@ -140,24 +140,15 @@ fun SignupScreen(
         Spacer(modifier = Modifier.height(24.dp))
         
         // Sign Up Button
-        Button(
+        com.sarvix.app.ui.components.GradientButton(
+            text = "Create Account",
             onClick = { viewModel.signup(email, password, username) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
+            modifier = Modifier.fillMaxWidth(),
             enabled = signupState !is Resource.Loading && 
                      password == confirmPassword &&
-                     password.isNotEmpty()
-        ) {
-            if (signupState is Resource.Loading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-            } else {
-                Text("Create Account")
-            }
-        }
+                     password.isNotEmpty(),
+            loading = signupState is Resource.Loading
+        )
         
         // Error Message
         if (signupState is Resource.Error) {

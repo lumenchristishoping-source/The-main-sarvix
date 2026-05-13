@@ -240,8 +240,10 @@ fun EmptyChatsView(
         
         Spacer(modifier = Modifier.height(24.dp))
         
-        Button(onClick = onFindPeople) {
-            Text("Find People")
-        }
+        com.sarvix.app.ui.components.GradientButton(
+            text = "Find People",
+            onClick = onFindPeople,
+            modifier = Modifier.fillMaxWidth()
+        )
     }
 }

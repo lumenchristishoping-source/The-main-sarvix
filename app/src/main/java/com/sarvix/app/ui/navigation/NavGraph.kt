@@ -23,8 +23,11 @@ import com.sarvix.app.ui.screens.profile.EditProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileScreen
 import com.sarvix.app.ui.screens.profile.ProfileSetupScreen
 import com.sarvix.app.ui.screens.settings.BlockedUsersScreen
+import com.sarvix.app.ui.screens.settings.ChangePasswordScreen
+import com.sarvix.app.ui.screens.settings.PrivacyPolicyScreen
 import com.sarvix.app.ui.screens.settings.PrivacyScreen
 import com.sarvix.app.ui.screens.settings.SettingsScreen
+import com.sarvix.app.ui.screens.settings.TermsOfServiceScreen
 import com.sarvix.app.ui.screens.user.UserProfileScreen
 import com.sarvix.app.viewmodel.AuthViewModel
 import com.sarvix.app.viewmodel.ProfileViewModel
@@ -64,6 +67,18 @@ fun NavGraph(
 
         composable(Screen.BlockedUsers.route) {
             BlockedUsersScreen(navController = navController)
+        }
+
+        composable(Screen.ChangePassword.route) {
+            ChangePasswordScreen(navController = navController)
+        }
+
+        composable(Screen.TermsOfService.route) {
+            TermsOfServiceScreen(navController = navController)
+        }
+
+        composable(Screen.PrivacyPolicy.route) {
+            PrivacyPolicyScreen(navController = navController)
         }
 
         composable(Screen.Login.route) {

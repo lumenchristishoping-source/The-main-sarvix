@@ -1,14 +1,24 @@
 package com.sarvix.app.ui.components
 
-import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.sarvix.app.data.model.MoodStatus
 import com.sarvix.app.ui.theme.*
@@ -17,7 +27,6 @@ import com.sarvix.app.ui.theme.*
 fun FlowRow(
     modifier: Modifier = Modifier,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     content: @Composable RowScope.() -> Unit
 ) {
     Row(
@@ -74,46 +83,143 @@ fun PillHeader(
 @Composable
 fun AnimatedGradientBorder(
     modifier: Modifier = Modifier,
-    borderWidth: androidx.compose.ui.unit.Dp = 2.dp,
-    shape: androidx.compose.ui.graphics.Shape = MaterialTheme.shapes.medium,
+    borderWidth: Dp = 2.dp,
+    shape: Shape = MaterialTheme.shapes.medium,
+    rightEdgeOnly: Boolean = false,
     content: @Composable () -> Unit
 ) {
-    val infiniteTransition = androidx.compose.animation.core.rememberInfiniteTransition(label = "gradient")
-    val angle by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 360f,
-        animationSpec = androidx.compose.animation.core.infiniteRepeatable(
-            animation = androidx.compose.animation.core.tween(3000, easing = androidx.compose.animation.core.LinearEasing),
-            repeatMode = androidx.compose.animation.core.RepeatMode.Restart
+    val infiniteTransition = rememberInfiniteTransition(label = "gradient")
+
+    val color1 by infiniteTransition.animateColor(
+        initialValue = NeonCyan,
+        targetValue = NeonPurple,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
         ),
-        label = "angle"
+        label = "color1"
     )
 
-    val brush = androidx.compose.ui.graphics.Brush.sweepGradient(
-        colors = listOf(NeonCyan, NeonPurple, NeonPink, NeonCyan),
+    val color2 by infiniteTransition.animateColor(
+        initialValue = NeonPurple,
+        targetValue = NeonPink,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "color2"
+    )
+
+    val color3 by infiniteTransition.animateColor(
+        initialValue = NeonPink,
+        targetValue = WarmOrange,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "color3"
+    )
+
+    val brush = Brush.linearGradient(
+        colors = listOf(color1, color2, color3, color1)
     )
 
     Surface(
-        modifier = modifier.padding(borderWidth),
+        modifier = modifier,
         shape = shape,
-        color = MaterialTheme.colorScheme.surface
+        color = Color.Transparent
     ) {
-        androidx.compose.foundation.layout.Box(
+        Box(
             modifier = Modifier
-                .padding(borderWidth)
+                .fillMaxWidth()
                 .drawWithContent {
-                    rotate(angle) {
-                        drawCircle(
+                    if (rightEdgeOnly) {
+                        drawContent()
+                        drawRect(
                             brush = brush,
-                            radius = size.width,
-                            blendMode = androidx.compose.ui.graphics.BlendMode.SrcIn
+                            topLeft = Offset(size.width - borderWidth.toPx(), 0f),
+                            size = Size(borderWidth.toPx(), size.height)
                         )
+                    } else {
+                        // Full border logic
+                        drawContent()
+                        // Top
+                        drawRect(brush, topLeft = Offset.Zero, size = Size(size.width, borderWidth.toPx()))
+                        // Bottom
+                        drawRect(brush, topLeft = Offset(0f, size.height - borderWidth.toPx()), size = Size(size.width, borderWidth.toPx()))
+                        // Left
+                        drawRect(brush, topLeft = Offset.Zero, size = Size(borderWidth.toPx(), size.height))
+                        // Right
+                        drawRect(brush, topLeft = Offset(size.width - borderWidth.toPx(), 0f), size = Size(borderWidth.toPx(), size.height))
                     }
-                    drawContent()
                 }
         ) {
             content()
         }
+    }
+}
+
+@Composable
+fun GradientButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    loading: Boolean = false
+) {
+    val infiniteTransition = rememberInfiniteTransition(label = "btnGradient")
+
+    val color1 by infiniteTransition.animateColor(
+        initialValue = NeonPurple,
+        targetValue = NeonCyan,
+        animationSpec = infiniteRepeatable(
+            animation = tween(3000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "c1"
+    )
+
+    val color2 by infiniteTransition.animateColor(
+        initialValue = NeonPink,
+        targetValue = NeonPurple,
+        animationSpec = infiniteRepeatable(
+            animation = tween(3000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "c2"
+    )
+
+    val color3 by infiniteTransition.animateColor(
+        initialValue = WarmOrange,
+        targetValue = NeonPink,
+        animationSpec = infiniteRepeatable(
+            animation = tween(3000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "c3"
+    )
+
+    val brush = Brush.linearGradient(
+        colors = listOf(color1, color2, color3, color1)
+    )
+
+    Box(
+        modifier = modifier
+            .height(56.dp)
+            .clip(CircleShape)
+            .then(
+                if (enabled) Modifier.background(brush)
+                else Modifier.background(Color.Gray.copy(alpha = 0.5f))
+            )
+            .clickable(enabled = enabled && !loading) { onClick() }
+            .padding(horizontal = 24.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = if (loading) "" else text,
+            style = MaterialTheme.typography.titleMedium,
+            color = OnPrimary
+        )
     }
 }
 

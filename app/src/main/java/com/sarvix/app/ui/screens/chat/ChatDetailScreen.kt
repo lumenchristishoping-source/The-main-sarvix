@@ -48,7 +48,6 @@ fun ChatDetailScreen(
     viewModel: ChatViewModel = hiltViewModel()
 ) {
     val messagesState by viewModel.messagesState.collectAsState()
-    val sendMessageState by viewModel.sendMessageState.collectAsState()
     val clarifyLimitState by viewModel.clarifyLimitState.collectAsState()
     val selectedIntent by viewModel.selectedIntent.collectAsState()
     
@@ -80,38 +79,8 @@ fun ChatDetailScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // Profile picture placeholder
-                        Surface(
-                            modifier = Modifier.size(40.dp),
-                            shape = CircleShape,
-                            color = SurfaceVariant
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Person,
-                                contentDescription = null,
-                                modifier = Modifier.padding(8.dp),
-                                tint = OnSurfaceVariant
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(12.dp))
-                        Column {
-                            Text(
-                                text = "Chat",
-                                style = MaterialTheme.typography.titleMedium
-                            )
-                            Text(
-                                text = "Online",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }
-                },
+            com.sarvix.app.ui.components.PillHeader(
+                title = "Chat",
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(
@@ -139,8 +108,7 @@ fun ChatDetailScreen(
                         onIntentSelected = {
                             viewModel.setIntentTag(it)
                             showIntentSelector = false
-                        },
-                        onDismiss = { showIntentSelector = false }
+                        }
                     )
                 }
                 
@@ -240,9 +208,6 @@ fun ChatDetailScreen(
                                     clarifyLimit = (clarifyLimitState as? Resource.Success)?.data,
                                     onRequestClarification = {
                                         viewModel.requestClarification(message.id)
-                                    },
-                                    onTranslate = {
-                                        viewModel.translateMessage(message.id, "en") // Use user's language
                                     }
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
@@ -273,8 +238,7 @@ fun MessageBubble(
     message: Message,
     isFromMe: Boolean,
     clarifyLimit: ClarifyLimit?,
-    onRequestClarification: () -> Unit,
-    onTranslate: () -> Unit
+    onRequestClarification: () -> Unit
 ) {
     var showClarification by remember { mutableStateOf(message.clarifications.isNotEmpty()) }
     var showTranslation by remember { mutableStateOf(false) }
@@ -471,8 +435,7 @@ fun ClarificationCard(clarification: Clarification) {
 @Composable
 fun IntentTagSelector(
     selectedIntent: IntentTag?,
-    onIntentSelected: (IntentTag?) -> Unit,
-    onDismiss: () -> Unit
+    onIntentSelected: (IntentTag?) -> Unit
 ) {
     Surface(
         modifier = Modifier.fillMaxWidth(),

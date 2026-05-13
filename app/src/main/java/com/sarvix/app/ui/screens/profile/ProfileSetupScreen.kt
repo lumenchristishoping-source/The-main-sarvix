@@ -54,12 +54,8 @@ fun ProfileSetupScreen(
     
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Complete Your Profile") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimary
-                )
+            com.sarvix.app.ui.components.PillHeader(
+                title = "Complete Your Profile"
             )
         }
     ) { paddingValues ->
@@ -133,7 +129,8 @@ fun ProfileSetupScreen(
                     Spacer(modifier = Modifier.width(1.dp))
                 }
                 
-                Button(
+                com.sarvix.app.ui.components.GradientButton(
+                    text = if (currentStep < 4) "Next" else "Complete",
                     onClick = {
                         if (currentStep < 4) {
                             currentStep++
@@ -158,10 +155,9 @@ fun ProfileSetupScreen(
                         3 -> selectedLanguage != null
                         4 -> true
                         else -> false
-                    }
-                ) {
-                    Text(if (currentStep < 4) "Next" else "Complete")
-                }
+                    },
+                    loading = updateState is Resource.Loading
+                )
             }
             
             // Error Message
@@ -227,8 +223,7 @@ fun BasicInfoStep(
         
         androidx.compose.foundation.layout.FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             MoodStatus.values().forEach { mood ->
                 val isSelected = mood == selectedMood
@@ -492,8 +487,7 @@ fun ReviewStep(
                 Spacer(modifier = Modifier.height(4.dp))
                 
                 androidx.compose.foundation.layout.FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     selectedInterests.forEach { interest ->
                         AssistChip(

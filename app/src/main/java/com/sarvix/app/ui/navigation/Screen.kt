@@ -20,6 +20,9 @@ sealed class Screen(val route: String) {
     object Settings : Screen("settings")
     object Privacy : Screen("privacy")
     object BlockedUsers : Screen("blocked_users")
+    object ChangePassword : Screen("change_password")
+    object TermsOfService : Screen("terms_of_service")
+    object PrivacyPolicy : Screen("privacy_policy")
     
     object NewPost : Screen("new_post")
     object UserProfile : Screen("user/{userId}") {

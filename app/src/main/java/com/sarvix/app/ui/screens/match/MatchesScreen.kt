@@ -231,6 +231,7 @@ fun MyMatchesContent(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MatchSuggestionCard(
     suggestion: MatchSuggestion,
@@ -407,14 +408,11 @@ fun MatchSuggestionCard(
                 
                 Spacer(modifier = Modifier.width(16.dp))
                 
-                Button(
+                com.sarvix.app.ui.components.GradientButton(
+                    text = "Connect",
                     onClick = onAccept,
                     modifier = Modifier.weight(1f)
-                ) {
-                    Icon(Icons.Default.Check, contentDescription = null)
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text("Connect")
-                }
+                )
             }
         }
     }
@@ -563,23 +561,5 @@ fun EmptyMatchesView() {
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
-    }
-}
-
-// FlowRow implementation for chips
-@Composable
-fun FlowRow(
-    modifier: Modifier = Modifier,
-    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    content: @Composable RowScope.() -> Unit
-) {
-    // Simplified implementation - in production use a proper FlowRow library
-    Row(
-        modifier = modifier,
-        horizontalArrangement = horizontalArrangement,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        content()
     }
 }

@@ -113,22 +113,13 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(24.dp))
         
         // Login Button
-        Button(
+        com.sarvix.app.ui.components.GradientButton(
+            text = "Sign In",
             onClick = { viewModel.login(email, password) },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-            enabled = loginState !is Resource.Loading
-        ) {
-            if (loginState is Resource.Loading) {
-                CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp),
-                    color = MaterialTheme.colorScheme.onPrimary
-                )
-            } else {
-                Text("Sign In")
-            }
-        }
+            modifier = Modifier.fillMaxWidth(),
+            enabled = loginState !is Resource.Loading,
+            loading = loginState is Resource.Loading
+        )
         
         // Error Message
         if (loginState is Resource.Error) {
