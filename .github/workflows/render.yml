@@ -49,7 +49,7 @@ jobs:
       - name: Install ffmpeg
         uses: FedericoCarboni/setup-ffmpeg@v3
 
-      - name: Render video
+      - name: Render AnimeEdit
         run: |
           mkdir -p out
           ./node_modules/.bin/remotion render src/Root.tsx AnimeEdit out/anime-edit.mp4 \
@@ -59,12 +59,21 @@ jobs:
             --browser-executable-path="$CHROME_PATH" \
             --log verbose
 
-      - name: Upload rendered video
+      - name: Render DragonBallEdit
+        run: |
+          ./node_modules/.bin/remotion render src/Root.tsx DragonBallEdit out/dragon-ball-edit.mp4 \
+            --codec h264 \
+            --jpeg-quality 95 \
+            --concurrency 2 \
+            --browser-executable-path="$CHROME_PATH" \
+            --log verbose
+
+      - name: Upload rendered videos
         uses: actions/upload-artifact@v4
         with:
-          name: anime-edit-${{ github.sha }}
-          path: out/anime-edit.mp4
+          name: edits-${{ github.sha }}
+          path: out/
           retention-days: 30
 
-      - name: Show output size
-        run: ls -lh out/anime-edit.mp4
+      - name: Show output sizes
+        run: ls -lh out/
