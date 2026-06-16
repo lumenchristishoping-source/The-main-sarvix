@@ -1,0 +1,31 @@
+{
+  "name": "anime-edit",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render src/Root.tsx AnimeEdit out/anime-edit.mp4 --codec h264 --jpeg-quality 95 --concurrency 4",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/motion-blur": "^4.0.478",
+    "@remotion/noise": "^4.0.478",
+    "@remotion/player": "^4.0.478",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.478"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "typescript": "^5.9.3"
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:43867/git/lumenchristishoping-source/The-main-sarvix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
