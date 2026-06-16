@@ -39,8 +39,12 @@ jobs:
             libxext6 fonts-liberation \
             libasound2t64 || sudo apt-get install -y libasound2
 
-      - name: Install Remotion Chrome
-        run: npx remotion browser ensure
+      - name: Find Chrome
+        run: |
+          CHROME=$(which google-chrome-stable || which google-chrome || which chromium-browser || which chromium)
+          echo "CHROME_PATH=$CHROME" >> $GITHUB_ENV
+          echo "Found Chrome at: $CHROME"
+          $CHROME --version
 
       - name: Install ffmpeg
         uses: FedericoCarboni/setup-ffmpeg@v3
@@ -52,6 +56,7 @@ jobs:
             --codec h264 \
             --jpeg-quality 95 \
             --concurrency 2 \
+            --browser-executable-path="$CHROME_PATH" \
             --log verbose
 
       - name: Upload rendered video
